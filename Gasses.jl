@@ -3,7 +3,7 @@
 mutable struct Gas
     cp::Float64
     cv::Float64
-    k::Float64
+    κ::Float64
 end
 
 Argon = Gas(0.520, 0.312, 1.67)
