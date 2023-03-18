@@ -1,7 +1,10 @@
 function w_out_net(r_p, T_1, T_3, η_c, η_t, Gas)
     κ = Gas.κ
+    c_p = Gas.cp
     α = (κ - 1) / κ
-    return (T_1 / η_c) * (r_p ^ α - 1) - η_t * T_3 * (1 - r_p ^ α)
+    r_p_1 = sqrt(r_p)
+
+    return 42 # need to fix
 
 end
 
@@ -9,7 +12,7 @@ function η_th(r_p, T_1, T_3, Gas)
     κ = Gas.κ
     α = (κ - 1) / κ
 
-    return 1 - T_1 /  T_3 * (r_p) ^ α
+    return 1 - ((T_1 /  T_3) * (r_p ^ α)) # Correct
 end
 
 function η_II(T_2, T_3, r_p, Gas, T_0)
