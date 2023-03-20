@@ -1,6 +1,7 @@
-include("./cycles/simple.jl")
+#include("./cycles/simple.jl")
 #include("./cycles/intercool.jl")
-#include("./cycles/regen.jl")
+include("./cycles/regen.jl")
+#include("./cycles/IRR.jl")
 include("./plotting.jl")
 include("./Gasses.jl")
 
@@ -12,7 +13,8 @@ T_3 = 1590 #K
 
 # Properites to Vary
 r_p = 1:0.01:60
-Gasses = [Air, Argon, CO_2]
+#Gasses = [He, H, Argon, N_2, CO, CO_2, Air]
+Gasses = [Argon, N_2, CO, CO_2, Air]
 
 #η_th_vs_rp(η_th, r_p, Gasses, T_1, T_3)
 

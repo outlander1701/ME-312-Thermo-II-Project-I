@@ -4,7 +4,7 @@ function w_out_net(r_p, T_1, T_3, η_c, η_t, Gas)
     α = (κ - 1) / κ
     r_p_1 = sqrt(r_p)
 
-    return 42 # need to fix
+    return η_t * c_p * T_3 *(1 - r_p^(-α)) - (c_p / η_c) * T_1 * (r_p^(α) - 1)
 
 end
 
