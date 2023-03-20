@@ -7,11 +7,13 @@ function w_out_net(r_p, T_1, T_3, η_c, η_t, Gas)
 
 end
 
-function η_th(r_p, Gas, T_1, T_3)
+function η_th(r_p, T_1, T_3, Gas)
     κ = Gas.κ
+    c_p = Gas.cp
     α = (κ - 1) / κ
 
-    return 1 - (1 / (r_p ^ α))
+    return (η_t * c_p * T_3 *(1 - r_p^(-α)) - (c_p / η_c) * T_1 * (r_p^(α) - 1)) / (c_p *(T_3 - T_1*r_p^(α)) )
+    #return (η_t * T_3 *(1 - r_p^(-α)) - (1 / η_c) * T_1 * (r_p^(α) - 1)) / (T_3 - T_1*r_p^(α))
 
 end
 
