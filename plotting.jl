@@ -1,7 +1,7 @@
 using Plots
 using LaTeXStrings
 
-function η_th_vs_rp(cycle_func, r_p, Gasses, T_1, T_3, η_c, η_t,)
+function η_th_vs_rp(cycle_func, r_p, Gasses, T_1, T_3, η_c, η_t)
     N = length(r_p)
     M = length(Gasses)
 
