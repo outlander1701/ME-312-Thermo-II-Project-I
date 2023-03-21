@@ -1,11 +1,12 @@
 #include("./cycles/simple.jl")
 #include("./cycles/intercool.jl")
-include("./cycles/regen.jl")
-#include("./cycles/IRR.jl")
+#include("./cycles/regen.jl")
+include("./cycles/IRR.jl")
 include("./plotting.jl")
 include("./Gasses.jl")
 
 using Plots
+gr()
 # Assumed Cycle States
 T_1 = 313 #K 
 T_3 = 1590 #K 
