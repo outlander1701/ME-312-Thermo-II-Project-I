@@ -1,7 +1,7 @@
 using Plots
 using LaTeXStrings
 
-function η_th_vs_rp(cycle_func, r_p, Gasses, T_1, T_3, η_c, η_t)
+function η_th_vs_rp(cycle_func, r_p, Gasses, T_1, T_3, η_c, η_t, ϵ)
     N = length(r_p)
     M = length(Gasses)
 
@@ -10,7 +10,7 @@ function η_th_vs_rp(cycle_func, r_p, Gasses, T_1, T_3, η_c, η_t)
     for i ∈ 1:M
         η_th = Array{Float64, 1}(undef, N)
         for j ∈ 1:N
-            η_th[j] = cycle_func(r_p[j], T_1, T_3, η_c, η_t, Gasses[i])
+            η_th[j] = cycle_func(r_p[j], T_1, T_3, η_c, η_t, ϵ, Gasses[i])
         end
     
         plot!(r_p, η_th, label=Gasses[i].name)
