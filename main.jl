@@ -1,26 +1,34 @@
 #include("./cycles/simple.jl")
 #include("./cycles/intercool.jl")
-#include("./cycles/regen.jl")
-include("./cycles/IRR.jl")
+include("./cycles/regen.jl")
+#include("./cycles/IRR.jl")
 include("./plotting.jl")
 include("./Gasses.jl")
 
 using Plots
 gr()
+
 # Assumed Cycle States
-T_1 = 313 #K 
-T_3 = 1590 #K 
-η_c = 1
-η_t = 1
-ϵ = 1
+T_min = 313 # K 
+T_max = 1590 # K 
+T_0 = 293 # K
 
 # Properites to Vary
-r_p = 1:0.01:60
-#Gasses = [He, H, Argon, N_2, CO, CO_2, Air]
-Gasses = [Argon, N_2, CO, CO_2, Air]#[Argon, N_2, CO, CO_2, Air]
+r_p = 1:0.1:20
 
-η_th_vs_rp(η_th, r_p, Gasses, T_1, T_3, η_c, η_t, ϵ)
+η_c = 0.9
+η_t = 0.9
+ϵ = 0.9
 
-#work_out_net_vs_rp(w_out_net, r_p, T_1, T_3, η_c, η_t, Gasses) # For air, r_p* = 17.2
 
-# Test
+# Gas Vector
+Gasses = [Argon, Air, He, H] #[Argon, CO_2, Air, He, H] #[Argon, N_2, CO, CO_2, Air]
+
+# Plots
+#η_th_vs_rp(η_th, r_p, Gasses, T_min, T_max, η_c, η_t, ϵ, false)
+
+#work_out_net_vs_rp(w_out_net, r_p, T_min, T_max, η_c, η_t, Gasses, false) # For air, r_p* = 17.2
+
+#work_out_net_vs_η_th(η_th, w_out_net, r_p, T_min, T_max, η_c, η_t, ϵ, Gasses, true)
+
+η_II_vs_rp(η_II, r_p, Gasses, T_min, T_max, η_c, η_t, ϵ, true)

@@ -16,10 +16,8 @@ function η_th(r_p, T_1, T_3, η_c, η_t, ϵ, Gas)
 
 end
 
-function η_II(T_2, T_3, r_p, Gas, T_0)
-    κ = Gas.κ
-    α = (κ - 1) / κ
+function η_II(r_p, T_min, T_max, T_0, η_c, η_t, ϵ, Gas)
 
-    return (T_2 + T_3) * (1 - r_p ^ -α) / ((T_2 + T_3) - T_0*ln(T_2 * T_3))
-
+    return η_th(r_p, T_min, T_max, η_c, η_t, ϵ, Gas) / ((T_min + T_max) / T_max)
+    
 end
