@@ -135,9 +135,9 @@ function work_out_net_vs_η_th(eff_func, work_func, r_p, T_min, T_max, η_c, η_
         end
 
         if end_index > 1 && ribbon == true
-            plot!(η_th[1:end_index], w_out_net_80[1:end_index], fillrange=w_out_net_100[1:end_index], fillalpha = 0.1, c = i, alpha=0.2, label=Gasses[i].name)
+            plot!(η_th[1:end_index], w_out_net_80[1:end_index], fillrange=w_out_net_100[1:end_index], fillalpha = 0.2, c = i, alpha=0.2, label=Gasses[i].name)
         elseif ribbon == true
-            plot!(η_th, w_out_net_80, fillrange=w_out_net_100, fillalpha = 0.1, c = i, alpha=0.2, label=Gasses[i].name)
+            plot!(η_th, w_out_net_80, fillrange=w_out_net_100, fillalpha = 0.2, c = i, alpha=0.2, label=Gasses[i].name)
         end
 
         
