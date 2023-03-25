@@ -120,7 +120,7 @@ function work_out_net_vs_rp(cycle_func, r_p, T_1, T_3, η_c, η_t, Gasses, ribbo
 
 end
 
-function work_out_net_vs_η_th(eff_func, work_func, r_p, T_min, T_max, η_c, η_t, ϵ, Gasses, ribbon)
+function work_out_net_vs_η_th(eff_func, work_func, r_p, T_min, T_max, η_c, η_t, ϵ, Gasses, ribbon, no_end)
     N = length(r_p)
     M = length(Gasses)
 
@@ -148,10 +148,14 @@ function work_out_net_vs_η_th(eff_func, work_func, r_p, T_min, T_max, η_c, η_
 
             η_th[k] = eff_func(r_p[k], T_min, T_max, η_c, η_t, ϵ, Gasses[i])
 
-            if k>2 && η_th[k] < η_th[k-1]
+            if no_end && k>2 && η_th[k] < η_th[k-1]
                 end_index = k
                 break
             end
+        end
+
+        if end_index == 1
+            end_index = N
         end
 
         if end_index > 1 && ribbon == true
