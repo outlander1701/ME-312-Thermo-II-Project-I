@@ -37,7 +37,7 @@ function η_th(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
 
     #return (1 - r_p^(-α) - (2*T_1/T_5)*((r_p^(α/2)) - 1)) / (1 - (T_1 / T_5)*r_p^(α/2)) # Correct
     #return w_out_net(r_p, T_min, T_max, η_c, η_t, Gas) / (c_p * (T_max - (1/η_c)*T_min*(r_p_1^(α) - 1) - T_min))
-    return w_out_net(r_p, T_min, T_max, η_c, η_t, Gas) / (c_p * (T_max - (T_min*r_p^(α))))
+    return w_out_net(r_p, T_min, T_max, η_c, η_t, Gas) / (c_p * (T_max - (T_min/η_c)*r_p_1^(α))
 
 end
 
