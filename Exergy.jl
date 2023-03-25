@@ -1,3 +1,5 @@
+Temp(r_p, T_min, T_max, η_c, η_t, ϵ, Gas);
+
 function Φ_Q_out(C_p, T_in, T_out, T_min)
 
     return T_min*C_p*log(T_out/T_in) + C_p*(T_in- T_out)
