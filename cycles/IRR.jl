@@ -4,15 +4,16 @@ function Temp(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
     r_p_1 = r_p^(1/2);
 
     T_1 = T_min;
-    T_2 = (T_min/η_c)*(r_p_1^(α)-1) + T_min;
+    T_2 = (T_min/η_c)*(r_p_1^(α) - 1) + T_min;
     T_3 = T_1;
     T_4 = T_2;
-    T_5 = ϵ*(T_4 - T_2) + T_2;
     T_6 = T_max;
-    T_7 = T_max*η_t*(1-r_p_1^(-α)) + T_max;
+    T_7 = T_max*η_t*(r_p_1^(-α) - 1) + T_max;
     T_8 = T_6;
     T_9 = T_7;
     T_10 = T_4;
+    T_5 = ϵ*(T_9 - T_4) + T_4;
+
 
     return T_1, T_2, T_3, T_4, T_5, T_6, T_7, T_8, T_9, T_10
 end
