@@ -1,13 +1,11 @@
-Temp(r_p, T_min, T_max, η_c, η_t, ϵ, Gas);
-
-function Φ_Q_out(C_p, T_in, T_out, T_min)
-
-    return T_min*C_p*log(T_out/T_in) + C_p*(T_in- T_out)
+function Φ_Q_out(T_in, T_out, T_L, Gas)
+    C_p = Gas.cp;
+    return T_L*C_p*log(T_out/T_in) + C_p*(T_in - T_out)
 end
 
-function Φ_Q_in(C_p, T_in, T_out, T_max)
-
-    return T_max*C_p*log(T_out/T_in) + C_p*(T_out - T_in)
+function Φ_Q_in(T_in, T_out, T_H, Gas)
+    C_p = Gas.cp;
+    return T_H*C_p*log(T_out/T_in) - C_p*(T_out - T_in)
 end
 
 function Φ_Turbine(C_p, T_max, η_t, r_p, n, Gas)

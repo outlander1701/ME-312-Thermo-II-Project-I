@@ -1,12 +1,12 @@
-function Temp(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
 
-    κ = Gas.κ;
-    α = (κ-1)/κ;
+function Temp(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
+    κ = Gas.κ
+    α = (κ - 1) / κ
 
     T_1 = T_min;
     T_2 = (T_min/η_c)*(r_p^(α)-1) + T_min;
     T_3 = T_max;
-    T_4 = T_max*η_t*(1-r_p^(-α)) + T_max;
+    T_4 = T_max*η_t*(r_p^(-α)-1) + T_max;
 
     return T_1, T_2, T_3, T_4
 end
