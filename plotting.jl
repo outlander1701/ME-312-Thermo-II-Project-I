@@ -116,7 +116,7 @@ function work_out_net_vs_rp(cycle_func, r_p, T_1, T_3, η_c, η_t, Gasses, ribbo
     end
 
     xlabel!("Pressure Ratio")
-    ylabel!("Net Work Out [kW]")
+    ylabel!("Net Work Out [kJ/kg]")
 
 end
 
@@ -178,6 +178,6 @@ function work_out_net_vs_η_th(eff_func, work_func, r_p, T_min, T_max, η_c, η_
     end
 
     xlabel!("Thermal Efficiency")
-    ylabel!("Net Work Out [kW]")
+    ylabel!("Net Work Out [kJ/kg]")
 
 end

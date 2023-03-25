@@ -2,8 +2,8 @@
 include("./extrema.jl")
 #include("./cycles/simple.jl")
 #include("./cycles/intercool.jl")
-include("./cycles/regen.jl")
-#include("./cycles/IRR.jl")
+#include("./cycles/regen.jl")
+include("./cycles/IRR.jl")
 include("./plotting.jl")
 include("./Gasses.jl")
 
@@ -31,9 +31,9 @@ Gasses = [Argon, Air, He, H] #[Argon, CO_2, Air, He, H] #[Argon, N_2, CO, CO_2, 
 # Plots
 #η_th_vs_rp(η_th, r_p, Gasses, T_min, T_max, η_c, η_t, ϵ, true, true)
 
-#work_out_net_vs_rp(w_out_net, r_p, T_min, T_max, η_c, η_t, Gasses, true) # For air, r_p* = 17.2
+#work_out_net_vs_rp(w_out_net, r_p, T_min, T_max, η_c, η_t, Gasses, true) # For air, r_p* = 17.2 # Do this one
 
-work_out_net_vs_η_th(η_th, w_out_net, r_p, T_min, T_max, η_c, η_t, ϵ, Gasses, true, false)
+work_out_net_vs_η_th(η_th, w_out_net, r_p, T_min, T_max, η_c, η_t, ϵ, Gasses, true, true) # Do this one
 
 #η_II_vs_rp(η_II, r_p, Gasses, T_min, T_max, η_c, η_t, ϵ, true)
 
