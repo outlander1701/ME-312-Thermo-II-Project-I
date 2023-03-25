@@ -1,9 +1,11 @@
-#include("./cycles/simple.jl")
+#include("./Exergy.jl")
+include("./cycles/simple.jl")
 #include("./cycles/intercool.jl")
-include("./cycles/regen.jl")
+#include("./cycles/regen.jl")
 #include("./cycles/IRR.jl")
 include("./plotting.jl")
 include("./Gasses.jl")
+
 
 using Plots
 gr()
@@ -14,10 +16,10 @@ T_max = 1590 # K
 T_0 = 293 # K
 
 # Properites to Vary
-r_p = 1:0.1:20
+r_p = 1:0.1:80
 
-η_c = 0.9
-η_t = 0.9
+η_c = 1
+η_t = 1
 ϵ = 0.9
 
 
