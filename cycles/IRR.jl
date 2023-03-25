@@ -33,7 +33,9 @@ function η_th(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
     α = (κ - 1) / κ
     r_p_1 = sqrt(r_p)
 
-    return w_out_net(r_p, T_min, T_max, η_c, η_t, Gas) / (c_p * (T_max * (2 - r_p_1^(-α) - ϵ*r_p_1^(-α)) + 2*T_min*r_p_1^(α)))
+    T_1, T_2, T_3, T_4, T_5, T_6, T_7, T_8, T_9, T_10 = Temp(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
+
+    return w_out_net(r_p, T_min, T_max, η_c, η_t, Gas) / (c_p*(T_max-T_5)+(c_p*T_max*(1-r_p_1^(-α))))
 end
 
 function η_II(r_p, T_min, T_max, T_0, η_c, η_t, ϵ, Gas)

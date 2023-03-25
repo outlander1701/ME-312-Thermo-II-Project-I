@@ -1,7 +1,7 @@
 using Plots
 using LaTeXStrings
 
-function η_th_vs_rp(cycle_func, r_p, Gasses, T_1, T_3, η_c, η_t, ϵ, ribbon)
+function η_th_vs_rp(cycle_func, r_p, Gasses, T_1, T_3, η_c, η_t, ϵ, ribbon, vary_label)
     N = length(r_p)
     M = length(Gasses)
 
@@ -23,9 +23,18 @@ function η_th_vs_rp(cycle_func, r_p, Gasses, T_1, T_3, η_c, η_t, ϵ, ribbon)
             η_th_100[j] = cycle_func(r_p[j], T_1, T_3, η_c, η_t, 1, Gasses[i])
         end
 
-        plot!(r_p, η_th, label=Gasses[i].name, c = i)
-        if ribbon == true
-            plot!(r_p, η_th_80, fillrange=η_th_100, fillalpha = 0.1, c = i, alpha=0.1, label=nothing)
+        if (vary_label == true) && (ribbon == true)
+            name = Gasses[i].name
+            plot!(r_p, η_th_80, fillrange=η_th_100, fillalpha = 0.5, c = i, alpha=0.2, label=latexstring("$name: \$0.8 < \\epsilon < 1\$"), gradient=true)
+            plot!(r_p, η_th_80, label=nothing, line=(1, :dash), c=i)
+            plot!(r_p, η_th_100, label=nothing, c=i)
+
+        elseif (ribbon == true)
+            name = Gasses[i].name
+            plot!(r_p, η_th_80, fillrange=η_th_100, fillalpha = 0.5, c = i, alpha=0.2, label=name, gradient=true)
+            plot!(r_p, η_th_80, label=nothing, line=(1, :dash), c=i)
+            plot!(r_p, η_th_100, label=nothing, c=i)
+
         end
     end
 
@@ -34,7 +43,7 @@ function η_th_vs_rp(cycle_func, r_p, Gasses, T_1, T_3, η_c, η_t, ϵ, ribbon)
 
 end
 
-function η_II_vs_rp(cycle_func, r_p, Gasses, T_min, T_max, η_c, η_t, ϵ, ribbon)
+function η_II_vs_rp(cycle_func, r_p, Gasses, T_min, T_max, η_c, η_t, ϵ, ribbon, vary_label)
     N = length(r_p)
     M = length(Gasses)
 
@@ -56,9 +65,18 @@ function η_II_vs_rp(cycle_func, r_p, Gasses, T_min, T_max, η_c, η_t, ϵ, ribb
             η_II_100[j] = cycle_func(r_p[j], T_min, T_max, T_0, η_c, η_t, 1, Gasses[i])
         end
 
-        plot!(r_p, η_II, label=Gasses[i].name, c = i)
-        if ribbon == true
-            plot!(r_p, η_II_80, fillrange=η_II_100, fillalpha = 0.1, c = i, alpha=0.1, label=nothing)
+        #plot!(r_p, η_II, label=Gasses[i].name, c = i)
+        if (vary_label == true) && (ribbon == true)
+            name = Gasses[i].name
+            plot!(r_p, η_II_80, fillrange=η_II_100, fillalpha = 0.5, c = i, alpha=0.2, label=latexstring("$name: \$0.8 < \\epsilon < 1\$"), gradient=true)
+            plot!(r_p, η_II_80, label=nothing, line=(1, :dash), c=i)
+            plot!(r_p, η_II_100, label=nothing, c=i)
+
+        elseif (ribbon == true)
+            name = Gasses[i].name
+            plot!(r_p, η_II_80, fillrange=η_II_100, fillalpha = 0.5, c = i, alpha=0.2, label=name, gradient=true)
+            plot!(r_p, η_II_80, label=nothing, line=(1, :dash), c=i)
+            plot!(r_p, η_II_100, label=nothing, c=i)
         end
     end
 
@@ -89,14 +107,16 @@ function work_out_net_vs_rp(cycle_func, r_p, T_1, T_3, η_c, η_t, Gasses, ribbo
             w_out_net_100[a] = cycle_func(r_p[a], T_1, T_3, 1, 1, Gasses[i])
         end
     
-        plot!(r_p, w_out_net, label=Gasses[i].name, c = i)
         if ribbon == true
-            plot!(r_p, w_out_net_80, fillrange=w_out_net_100, fillalpha = 0.1, c = i, alpha=0.2, label=nothing)
+            name = Gasses[i].name
+            plot!(r_p, w_out_net_80, fillrange=w_out_net_100, fillalpha = 0.5, c = i, alpha=0.2, label=latexstring("$name: \$0.8 < \\eta_{C,T} < 1\$"), gradient=true)
+            plot!(r_p, w_out_net_80, label=nothing, line=(1, :dash), c=i)
+            plot!(r_p, w_out_net_100, label=nothing, c=i)
         end
     end
 
     xlabel!("Pressure Ratio")
-    ylabel!("Net Work Out")
+    ylabel!("Net Work Out [kW]")
 
 end
 
@@ -137,18 +157,23 @@ function work_out_net_vs_η_th(eff_func, work_func, r_p, T_min, T_max, η_c, η_
         if end_index > 1 && ribbon == true
 
             name = Gasses[i].name
-            plot!(η_th[1:end_index], w_out_net_80[1:end_index], fillrange=w_out_net_100[1:end_index], fillalpha = 0.2, c = i, alpha=0.2, label=latexstring("$name: \$0.8 < \\eta_{C,T} < 1\$"), gradient=true)
+            plot!(η_th[1:end_index], w_out_net_80[1:end_index], fillrange=w_out_net_100[1:end_index], fillalpha = 0.5, c = i, alpha=0.2, label=latexstring("$name: \$0.8 < \\eta_{C,T} < 1\$"), gradient=true)
             plot!(η_th[1:end_index], w_out_net_80[1:end_index], label=nothing, line=(1, :dash), c=i)
             plot!(η_th[1:end_index], w_out_net_100[1:end_index], label=nothing, c=i)
 
         elseif ribbon == true
-            plot!(η_th, w_out_net_80, fillrange=w_out_net_100, fillalpha = 0.2, c = i, alpha=0.2, label=Gasses[i].name)
+
+            name = Gasses[i].name
+            plot!(η_th, w_out_net_80, fillrange=w_out_net_100, fillalpha = 0.5, c = i, alpha=0.2, label=latexstring("$name: \$0.8 < \\eta_{C,T} < 1\$"), gradient=true)
+            plot!(η_th, w_out_net_80, label=nothing, line=(1, :dash), c=i)
+            plot!(η_th, w_out_net_100, label=nothing, c=i)
+
         end
 
         
     end
 
     xlabel!("Thermal Efficiency")
-    ylabel!("Net Work Out")
+    ylabel!("Net Work Out [kW]")
 
 end
