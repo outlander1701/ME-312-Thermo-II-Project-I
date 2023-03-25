@@ -27,13 +27,13 @@ function w_out_net(r_p, T_min, T_max, η_c, η_t, Gas)
 
 end
 
-function η_th(r_p, T_1, T_3, η_c, η_t, ϵ, Gas)
+function η_th(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
     κ = Gas.κ
     c_p = Gas.cp
     α = (κ - 1) / κ
     r_p_1 = sqrt(r_p)
-    T_min = T_1
-    T_max = T_3
+    #T_min = T_1
+    #T_max = T_3
 
     #return (1 - r_p^(-α) - (2*T_1/T_5)*((r_p^(α/2)) - 1)) / (1 - (T_1 / T_5)*r_p^(α/2)) # Correct
     #return w_out_net(r_p, T_min, T_max, η_c, η_t, Gas) / (c_p * (T_max - (1/η_c)*T_min*(r_p_1^(α) - 1) - T_min))
