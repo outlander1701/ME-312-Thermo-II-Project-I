@@ -1,3 +1,18 @@
+function Temo(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
+    κ = Gas.κ;
+    α = (κ-1)/κ;
+
+    T_1 = T_min;
+    T_2 = (T_min/η_c)*(r_p^(α)-1) + T_min;
+    T_3 = T_max;
+    T_4 = T_max*η_t*(1-r_p^(-α)) + T_max;
+    T_5 = ϵ*(T_4 - T_2) + T_2;
+    T_6 = T_2;
+
+    return T_1, T_2, T_3, T_4, T_5, T_6
+end
+
+
 function w_out_net(r_p, T_min, T_max, η_c, η_t, Gas)
     κ = Gas.κ
     c_p = Gas.cp
