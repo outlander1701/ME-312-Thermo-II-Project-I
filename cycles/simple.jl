@@ -30,7 +30,7 @@ function η_th(r_p, T_1, T_3, η_c, η_t, ϵ, Gas)
 
 end
 
-function η_II(r_p, T_min, T_max, T_0, η_c, η_t, ϵ, Gas)
+function η_II(r_p, T_min, T_max, T_H, η_c, η_t, ϵ, Gas)
 
     return η_th(r_p, T_min, T_max, η_c, η_t, ϵ, Gas) / ((T_min + T_max) / T_max)
     

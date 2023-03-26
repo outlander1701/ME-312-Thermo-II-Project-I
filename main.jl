@@ -36,10 +36,10 @@ Gasses = [Argon, Air, He, H] #[Argon, CO_2, Air, He, H] #[Argon, N_2, CO, CO_2, 
 
 #work_out_net_vs_η_th(η_th, w_out_net, r_p, T_min, T_max, η_c, η_t, ϵ, Gasses, true, true) # Do this one
 
-#η_II_vs_rp(η_II, r_p, Gasses, T_min, T_max, η_c, η_t, ϵ, true)
+η_II_vs_rp(η_II, r_p, Gasses, T_min, T_max, η_c, η_t, ϵ, true)
 
-Φ_Q_in_vs_rp(Φ_Q_in, r_p, Gasses, T_min, T_max,T_L, T_H, η_c, η_t, ϵ)
+#Φ_Q_in_vs_rp(Φ_Q_in, r_p, Gasses, T_min, T_max,T_L, T_H, η_c, η_t, ϵ)
 
 #Φ_Q_out_vs_rp(Φ_Q_out, r_p, Gasses, T_min, T_max, T_L, η_c, η_t, ϵ)
 
-extrema_eval(w_out_net, η_th, η_II, r_p, T_min, T_max, Gasses)
+#extrema_eval(w_out_net, η_th, η_II, r_p, T_min, T_max, Gasses)
