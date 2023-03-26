@@ -5,7 +5,7 @@ include("./extrema.jl")
 #include("./cycles/regen.jl")
 include("./cycles/IRR.jl")
 include("./Tables.jl")
-include("./plotting.jl")
+#include("./plotting.jl")
 include("./Gasses.jl")
 
 
@@ -38,7 +38,8 @@ Gasses = [Argon, Air, He, H] #[Argon, CO_2, Air, He, H] #[Argon, N_2, CO, CO_2, 
 
 #η_II_vs_rp(η_II, r_p, Gasses, T_min, T_max, η_c, η_t, ϵ, true)
 
-#Φ_Q_in_vs_rp(Φ_Q_in, r_p, Gasses, T_min, T_max, T_H, η_c, η_t, ϵ)
+Φ_Q_in_vs_rp(Φ_Q_in, r_p, Gasses, T_min, T_max,T_L, T_H, η_c, η_t, ϵ)
+
 #Φ_Q_out_vs_rp(Φ_Q_out, r_p, Gasses, T_min, T_max, T_L, η_c, η_t, ϵ)
 
 extrema_eval(w_out_net, η_th, η_II, r_p, T_min, T_max, Gasses)

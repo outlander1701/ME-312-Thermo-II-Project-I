@@ -3,9 +3,9 @@ function Φ_Q_out(T_in, T_out, T_L, Gas)
     return T_L*C_p*log(T_out/T_in) + C_p*(T_in - T_out)
 end
 
-function Φ_Q_in(T_in, T_out, T_H, Gas)
+function Φ_Q_in(T_in, T_out, T_L, T_H, Gas)
     C_p = Gas.cp;
-    return T_H*C_p*log(T_out/T_in) - C_p*(T_out - T_in)
+    return T_L*C_p*log(T_out/T_in) - C_p*(T_L/T_H)*(T_out - T_in)
 end
 
 function Φ_Turbine(C_p, T_max, η_t, r_p, n, Gas)
