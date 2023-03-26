@@ -8,7 +8,7 @@ function Temp(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
     T_3 = T_1;
     T_4 = T_2;
     T_5 = T_max;
-    T_6 = T_max*η_t*(1-r_p_1^(-α)) + T_max;
+    T_6 = T_max*η_t*(1-r_p^(-α)) + T_max;
 
     return T_1, T_2, T_3, T_4, T_5, T_6
 end
@@ -18,11 +18,7 @@ function w_out_net(r_p, T_min, T_max, η_c, η_t, Gas)
     c_p = Gas.cp
     α = (κ - 1) / κ
     r_p_1 = sqrt(r_p)
-    T_1 = T_min
-    T_5 = T_max
 
-    #return c_p * (η_t * T_3 * (r_p^(-α) - 1) + 2 * η_c * T_1 * (1 - r_p_1^α)) # Wrong
-    #return c_p*T_5*(1-r_p^(-α)) - (2*c_p*T_1*(r_p^(0.5*α) - 1)) # this is the eq from the book and it is wrong
     return η_t * c_p * T_max * (1 - r_p^(-α)) - (2 * c_p * T_1 / η_c) * (r_p_1^(α) - 1)
 
 end
@@ -32,18 +28,41 @@ function η_th(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
     c_p = Gas.cp
     α = (κ - 1) / κ
     r_p_1 = sqrt(r_p)
-    #T_min = T_1
-    #T_max = T_3
-
-    #return (1 - r_p^(-α) - (2*T_1/T_5)*((r_p^(α/2)) - 1)) / (1 - (T_1 / T_5)*r_p^(α/2)) # Correct
-    #return w_out_net(r_p, T_min, T_max, η_c, η_t, Gas) / (c_p * (T_max - (1/η_c)*T_min*(r_p_1^(α) - 1) - T_min))
+    
     return w_out_net(r_p, T_min, T_max, η_c, η_t, Gas) / (c_p * (T_max - (T_min/η_c)*r_p_1^(α)))
 
 end
 
+function log_avg(T_vec)
 
-function η_II(r_p, T_min, T_max, T_0, η_c, η_t, ϵ, Gas)
+    numerator = 0
+    denominator = 0
 
-    return η_th(r_p, T_min, T_max, η_c, η_t, ϵ, Gas) / ((T_min + T_max) / T_max)
+    for i ∈ eachindex(T_vec)
+        if isodd(i)
+            numerator += T_vec[i]
+            denominator += log(T_vec[i])
+        else
+            numerator -= T_vec[i]
+            denominator -= log(T_vec[i])
+        end
+    end
+
+    return numerator / denominator
     
+end
+
+
+
+function η_II(r_p, T_min, T_max, T_L, η_c, η_t, ϵ, Gas)
+    κ = Gas.κ
+    c_p = Gas.cp
+    α = (κ - 1) / κ
+
+    T_1, T_2, T_3, T_4, T_5, T_6 = Temp(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
+
+    T_min_avg = ((T_6 - T_1) + (T_2 - T_3)) / (log(T_6) - log(T_1) + log(T_2) - log(T_3))
+    T_max_avg = (T_5 - T_4) / log(T_5 / T_4)   
+
+    return η_th(r_p, T_min, T_max, η_c, η_t, ϵ, Gas) / (1 - (T_L / T_max_avg))
 end

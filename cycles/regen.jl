@@ -1,4 +1,4 @@
-function Temo(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
+function Temp(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
     κ = Gas.κ;
     α = (κ-1)/κ;
 
@@ -32,8 +32,30 @@ function η_th(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
     return (η_t * c_p * T_max *(1 - r_p^(-α)) - (c_p / η_c) * T_min * (r_p^(α) - 1)) / (c_p * (T_max - ϵ*(T_4 - T_2) - T_2))
 end
 
-function η_II(r_p, T_min, T_max, T_H, η_c, η_t, ϵ, Gas)
+function log_avg(T_vec)
 
-    return η_th(r_p, T_min, T_max, η_c, η_t, ϵ, Gas) / ((T_min + T_max) / T_max)
+    numerator = 0
+    denominator = 0
+
+    for i ∈ eachindex(T_vec)
+        if isodd(i)
+            numerator += T_vec[i]
+            denominator += log(T_vec[i])
+        else
+            numerator -= T_vec[i]
+            denominator -= log(T_vec[i])
+        end
+    end
+
+    return numerator / denominator
+    
+end
+
+function η_II(r_p, T_min, T_max, T_H, η_c, η_t, ϵ, Gas)
+    T_1, T_2, T_3, T_4, T_5, T_6 = Temp(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
+
+    T_max_avg = log_avg([T_5, T_3])
+
+    return η_th(r_p, T_min, T_max, η_c, η_t, ϵ, Gas) / (1 - (T_L / T_max_avg))
     
 end

@@ -1,11 +1,11 @@
 #include("./Exergy.jl")
 include("./extrema.jl")
-#include("./cycles/simple.jl")
+include("./cycles/simple.jl")
 #include("./cycles/intercool.jl")
 #include("./cycles/regen.jl")
-include("./cycles/IRR.jl")
+#include("./cycles/IRR.jl")
 include("./Tables.jl")
-#include("./plotting.jl")
+include("./plotting.jl")
 include("./Gasses.jl")
 
 
@@ -19,12 +19,11 @@ T_L = 283 # K
 T_H = 1620
 
 # Properites to Vary
-r_p = 1:0.1:1000 #60
+r_p = 1:1:60
 
 η_c = 1
 η_t = 1
 ϵ = 1
-
 
 # Gas Vector
 Gasses = [Argon, Air, He, H] #[Argon, CO_2, Air, He, H] #[Argon, N_2, CO, CO_2, Air]
@@ -36,7 +35,7 @@ Gasses = [Argon, Air, He, H] #[Argon, CO_2, Air, He, H] #[Argon, N_2, CO, CO_2, 
 
 #work_out_net_vs_η_th(η_th, w_out_net, r_p, T_min, T_max, η_c, η_t, ϵ, Gasses, true, true) # Do this one
 
-η_II_vs_rp(η_II, r_p, Gasses, T_min, T_max, η_c, η_t, ϵ, true)
+η_II_vs_rp(η_II, r_p, Gasses, T_min, T_max, T_L, η_c, η_t, ϵ, true, false)
 
 #Φ_Q_in_vs_rp(Φ_Q_in, r_p, Gasses, T_min, T_max,T_L, T_H, η_c, η_t, ϵ)
 

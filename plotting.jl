@@ -43,7 +43,7 @@ function η_th_vs_rp(cycle_func, r_p, Gasses, T_1, T_3, η_c, η_t, ϵ, ribbon, 
 
 end
 
-function η_II_vs_rp(cycle_func, r_p, Gasses, T_min, T_max, η_c, η_t, ϵ, ribbon, vary_label)
+function η_II_vs_rp(cycle_func, r_p, Gasses, T_min, T_max, T_L, η_c, η_t, ϵ, ribbon, vary_label)
     N = length(r_p)
     M = length(Gasses)
 
@@ -52,31 +52,30 @@ function η_II_vs_rp(cycle_func, r_p, Gasses, T_min, T_max, η_c, η_t, ϵ, ribb
     for i ∈ 1:M
         η_II = Array{Float64, 1}(undef, N)
         for j ∈ 1:N
-            η_II[j] = cycle_func(r_p[j], T_min, T_max, T_0, η_c, η_t, ϵ, Gasses[i])
+            η_II[j] = cycle_func(r_p[j], T_min, T_max, T_L, η_c, η_t, ϵ, Gasses[i])
         end
 
         η_II_80 = Array{Float64, 1}(undef, N)
         for j ∈ 1:N
-            η_II_80[j] = cycle_func(r_p[j], T_min, T_max, T_0, η_c, η_t, 0.8, Gasses[i])
+            η_II_80[j] = cycle_func(r_p[j], T_min, T_max, T_L, η_c, η_t, 0.8, Gasses[i])
         end
 
         η_II_100 = Array{Float64, 1}(undef, N)
         for j ∈ 1:N
-            η_II_100[j] = cycle_func(r_p[j], T_min, T_max, T_0, η_c, η_t, 1, Gasses[i])
+            η_II_100[j] = cycle_func(r_p[j], T_min, T_max, T_L, η_c, η_t, 1, Gasses[i])
         end
 
-        #plot!(r_p, η_II, label=Gasses[i].name, c = i)
         if (vary_label == true) && (ribbon == true)
             name = Gasses[i].name
-            plot!(r_p, η_II_80, fillrange=η_II_100, fillalpha = 0.5, c = i, alpha=0.2, label=latexstring("$name: \$0.8 < \\epsilon < 1\$"), gradient=true)
-            plot!(r_p, η_II_80, label=nothing, line=(1, :dash), c=i)
-            plot!(r_p, η_II_100, label=nothing, c=i)
+            plot!(r_p, η_II_80, fillrange=η_II_100, fillalpha = 0.5, c = i, alpha=0.2, label=latexstring("$name: \$0.8 < \\epsilon < 1\$"), gradient=true, ylimits=(0,1.05))
+            plot!(r_p, η_II_80, label=nothing, line=(1, :dash), c=i, ylimits=(0,1.05))
+            plot!(r_p, η_II_100, label=nothing, c=i, ylimits=(0,1.05))
 
         elseif (ribbon == true)
             name = Gasses[i].name
-            plot!(r_p, η_II_80, fillrange=η_II_100, fillalpha = 0.5, c = i, alpha=0.2, label=name, gradient=true)
-            plot!(r_p, η_II_80, label=nothing, line=(1, :dash), c=i)
-            plot!(r_p, η_II_100, label=nothing, c=i)
+            plot!(r_p, η_II_80, fillrange=η_II_100, fillalpha = 0.5, c = i, alpha=0.2, label=name, gradient=true, ylimits=(0,1.05))
+            plot!(r_p, η_II_80, label=nothing, line=(1, :dash), c=i, ylimits=(0,1.05))
+            plot!(r_p, η_II_100, label=nothing, c=i, ylimits=(0,1.05))
         end
     end
 
