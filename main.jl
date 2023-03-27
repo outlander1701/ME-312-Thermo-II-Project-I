@@ -32,7 +32,7 @@ function Φ_Total(r_p, T_min, T_max, T_L, T_H, η_c, η_t, ϵ, Gas)
     Φ_Heat_out = Φ_Q_out(T_2, T_3, T_L, Gas) + Φ_Q_out(T_9, T_10, T_L, Gas)
     Φ_Compr = Φ_Compressor(r_p, T_1, η_c, 2, Gas)
     Φ_Turb = Φ_Turbine(r_p, T_6, η_t, 2, Gas)
-    Φ_reg = Φ_regen(r_p, T_9, T_4, ϵ, Gas)
+    Φ_reg = Φ_regen(r_p,T_10, T_9, T_4, T_L, ϵ, Gas)
     
     return  Φ_Heat_in + Φ_Heat_out + Φ_Compr + Φ_Turb + Φ_reg
 end
@@ -64,7 +64,7 @@ Gasses = [Argon, Air, He, H] #[Argon, CO_2, Air, He, H] #[Argon, N_2, CO, CO_2, 
 #Φ_Q_in_vs_rp(Φ_Q_in, r_p, Gasses, T_min, T_max,T_L, T_H, η_c, η_t, ϵ)
 
 #Φ_Q_out_vs_rp(Φ_Q_out, r_p, Gasses, T_min, T_max, T_L, η_c, η_t, ϵ)
-#Φ_Total_r_vs_rp(Φ_Total, r_p, T_min, T_max, T_L, T_H, η_c, η_t, ϵ, Gasses)
+Φ_Total_r_vs_rp(Φ_Total, r_p, T_min, T_max, T_L, T_H, η_c, η_t, ϵ, Gasses)
 #Φ_Total_c_vs_rp(Φ_Total, r_p, T_min, T_max, T_L, T_H, η_c, η_t, ϵ, Gasses)
 #Φ_Total_t_vs_rp(Φ_Total, r_p, T_min, T_max, T_L, T_H, η_c, η_t, ϵ, Gasses)
 

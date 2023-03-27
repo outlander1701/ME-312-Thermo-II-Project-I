@@ -26,8 +26,8 @@ function Φ_Compressor(r_p, T_min, η_c, n, Gas)
     return n*C_p*T_min*(r_p_1^(α) - 1)*((1/η_c) - 1)
 end
 
-function Φ_regen(r_p, T_in_h, T_in_c, ϵ, Gas)
+function Φ_regen(r_p, T_out_c, T_in_h, T_in_c, T_L, ϵ, Gas)
     C_p = Gas.cp
-    return C_p*(log(T_in_c/T_in_h)+log((ϵ*(T_in_h - T_in_c) + T_in_c)/T_in_c))
+    return T_L*C_p*(log(T_out_c/T_in_h)+log((ϵ*(T_in_h - T_in_c) + T_in_c)/T_in_c))
 end
 
