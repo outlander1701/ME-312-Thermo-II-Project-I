@@ -1,0 +1,101 @@
+% Declare that this style file requires at least LaTeX version 2e.
+\NeedsTeXFormat{LaTeX2e}
+
+% Provide the name of your page, the date it was last updated, and a comment about what it's used for
+\ProvidesPackage{my_packages}[2020/10/10 My custom LaTeX style]
+
+% Now paste your code from the preamble here
+
+% fphw Template-specific packages.......................................................................
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage{fontenc} % Output font encoding for international characters
+%\usepackage{mathpazo} % Use the Palatino font
+\usepackage{graphicx} % Required for including images
+\usepackage{booktabs} % Required for better horizontal rules in tables
+\usepackage{listings} % Required for insertion of code
+\usepackage{enumerate} % To modify the enumerate environment
+\usepackage{pifont} % To use common PostScript fonts
+%......................................................................................................................................
+
+%The other packages I have used in my UPC template.......................................................................
+\usepackage{geometry} % approximately
+\usepackage{lipsum}                              %  Create dummy texts
+\usepackage{blindtext}
+\usepackage{mwe}                                  % Create dummy pictures
+\usepackage{textcomp}                         % support for the Text Companion fonts, provide many text symbols 
+\usepackage{gensymb}                          % Provides generic commands which work both in text and maths mode.
+\usepackage{graphicx}                           % Enhanced support for graphics
+\usepackage[sorting=none, defernumbers=true]{biblatex}              % bibliography  % https://www.overleaf.com/learn/latex/bibliography_management_with_biblatex
+\usepackage{xurl}                                  % handling the urls in bib file and it should be loaded after loading biblatex
+\usepackage{bookmark}                       % A new bookmark (outline) organization for hyperref
+\usepackage[section,below,verbose]{placeins}   % Control float placement    https://tex.stackexchange.com/a/282/114006
+\usepackage{float}                              % Place the float at precisely the location. Requires the float package. This is somewhat equivalent to h!,
+\usepackage{flafter}                               % Prevent a float floating "backwards" to the top of the page
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+    citecolor=blue
+}
+\urlstyle{same}  
+\usepackage{mathtools}                     % to box the equations and so more
+\usepackage{amsmath, amsthm, amssymb, amsfonts}     % important math packages
+\usepackage{siunitx}                      %  A comprehensive (SI) units package
+\usepackage[version=4]{mhchem}   % Typeset chemical formulae/equations and Risk and Safety phrases
+\usepackage{calc, expl3}            % for mhchem
+\usepackage{empheq}                  % Put box around the align environment     https://trucastuces.wordpress.com/2012/10/10/boxed-equations-in-latex/
+\usepackage{cases}                   % Numbered cases environment
+%\usepackage{ntheorem}                % Enhanced theorem environment
+
+%\usepackage{cite}                 % not compatible with biblatex https://ctan.org/pkg/cite?lang=en
+\usepackage{algorithm2e}             % https://ctan.org/pkg/algorithm2e
+\usepackage{flexisym}     
+\usepackage{breqn}            % https://ctan.org/pkg/breqn?lang=en 
+\usepackage{braket}       % for dirac notation in QM http://mirror.iopb.res.in/tex-archive/macros/latex/contrib/braket/braket.pdf
+\usepackage{physics}      % http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/physics/physics.pdf
+\usepackage{physunits}  % https://ctan.org/pkg/physunits?lang=en
+\usepackage{wasysym}   % astronomical symbols 
+%\numberwithin{equation}{section}  % https://tex.stackexchange.com/a/54242/114006
+
+\usepackage{array} % for tables
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{tabularx}
+
+\usepackage{lastpage}                % Reference last page for Page N of M type footers
+\usepackage{fancyhdr}               % Provides extensive facilities, both for constructing headers and footers, and for controlling their use 
+
+\usepackage[dvipsnames]{xcolor}       %  To color text: https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX % https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX#Reference_guide
+\usepackage{tcolorbox}               % https://ctan.org/pkg/tc%%olorbox?lang=en   [it should be after the xcolor]
+%\usepackage[font=normalsize,skip=12pt]{caption}                      % https://sodecon.blogspot.com/2011/07/latex-linebreak-newline-in-caption.html   https://texblog.org/2012/08/29/changing-the-font-size-in-latex/
+%\usepackage[font=small,skip=1pt]{caption}            % https://tex.stackexchange.com/q/94016/114006
+%\captionsetup{font=small,skip=0pt}                  
+%\captionsetup[table]{font=small,skip=0pt}
+%\captionsetup[figure]{font=small,skip=0pt}
+
+\renewcommand{\labelitemi}{$\blacksquare$}
+\renewcommand{\labelitemii}{$\bullet$}
+
+ \allowdisplaybreaks                                % https://latex.org/forum/viewtopic.php?t=12091
+
+\makeatletter
+\pdfstringdefDisableCommands{\let\cite\@gobble}    % https://tex.stackexchange.com/a/294894/114006
+\makeatother
+
+\usepackage{afterpage}  % https://tex.stackexchange.com/a/36881/114006
+
+% Changing the displayskips........................................
+\usepackage{etoolbox}                    
+\newcommand{\zerodisplayskips}{%
+  \setlength{\abovedisplayskip}{0pt}%
+  \setlength{\belowdisplayskip}{0pt}%
+  \setlength{\abovedisplayshortskip}{0pt}%
+  \setlength{\belowdisplayshortskip}{0pt}}
+\appto{\normalsize}{\zerodisplayskips}
+\appto{\small}{\zerodisplayskips}
+\appto{\footnotesize}{\zerodisplayskips}
+
+
+% Finally, we'll use \endinput to indicate that LaTeX can stop reading this file. LaTeX will ignore anything after this line.
+\endinput
