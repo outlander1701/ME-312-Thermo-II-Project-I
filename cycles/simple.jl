@@ -35,7 +35,7 @@ function η_II(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
     T_1, T_2, T_3, T_4 = Temp(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
     return η_th(r_p, T_min, T_max, η_c, η_t, ϵ, Gas) 
 end
-
+"""
 function Φ_Total(r_p, T_min, T_max, T_L, T_H, η_c, η_t, ϵ, Gas)
     T_1, T_2, T_3, T_4 = Temp(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
     Φ_Heat_in = Φ_Q_in(T_2, T_3, T_L, T_H, Gas)
@@ -46,3 +46,4 @@ function Φ_Total(r_p, T_min, T_max, T_L, T_H, η_c, η_t, ϵ, Gas)
     
     return  Φ_Heat_in + Φ_Heat_out + Φ_Compr + Φ_Turb 
 end
+"""
