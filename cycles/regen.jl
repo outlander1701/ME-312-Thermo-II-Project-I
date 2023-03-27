@@ -5,7 +5,7 @@ function Temo(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
     T_1 = T_min;
     T_2 = (T_min/η_c)*(r_p^(α)-1) + T_min;
     T_3 = T_max;
-    T_4 = T_max*η_t*(-1+r_p^(-α)) + T_max;
+    T_4 = T_max*η_t*(r_p^(-α)-1) + T_max;
     T_5 = ϵ*(T_4 - T_2) + T_2;
     T_6 = T_2;
 
@@ -41,7 +41,9 @@ end
 """
 
 function η_II(r_p, T_min, T_max, T_0, η_c, η_t, ϵ, Gas)
-
-    return η_th(r_p, T_min, T_max, η_c, η_t, ϵ, Gas) / ((T_min + T_max) / T_max)
+    Temp(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
+    T_min_c = (T_6 - T_1)/log(T_6/T_1)
+    T_max_c = (T_3 - T_5)/log(T_3/T_5)
+    return η_th(r_p, T_min, T_max, η_c, η_t, ϵ, Gas) / η_th(r_p, T_min_c, T_max_c, η_c, η_t, ϵ, Gas)
     
 end

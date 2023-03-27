@@ -8,7 +8,7 @@ function Temp(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
     T_3 = T_1;
     T_4 = T_2;
     T_5 = T_max;
-    T_6 = T_max*η_t*(1-r_p_1^(-α)) + T_max;
+    T_6 = T_max*η_t*(r_p^(-α)-1) + T_max;
 
     return T_1, T_2, T_3, T_4, T_5, T_6
 end
@@ -43,7 +43,9 @@ end
 
 
 function η_II(r_p, T_min, T_max, T_0, η_c, η_t, ϵ, Gas)
-
-    return η_th(r_p, T_min, T_max, η_c, η_t, ϵ, Gas) / ((T_min + T_max) / T_max)
+    Temp(r_p, T_min, T_max, η_c, η_t, ϵ, Gas)
+    T_min_c = (T_6 - T_1)/log(T_6/T_1)
+    T_max_c = (T_5 - T_4)/log(T_5/T_4)
+    return η_th(r_p, T_min, T_max, η_c, η_t, ϵ, Gas) / η_th(r_p, T_min_c, T_max_c, η_c, η_t, ϵ, Gas)
     
 end

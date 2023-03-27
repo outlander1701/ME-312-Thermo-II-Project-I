@@ -75,3 +75,99 @@ function Φ_Q_out_vs_rp(cycle_func, r_p, Gasses, T_min, T_max, T_L, η_c, η_t, 
     ylabel!("Exergy Destroyed [kJ/kg]")
 
 end
+
+function Φ_Total_r_vs_rp(cycle_func, r_p, T_min, T_max, T_L, T_H, η_c, η_t, ϵ, Gasses)
+    N = length(r_p)
+    M = length(Gasses)
+
+    plot()
+
+    for i ∈ 1:M
+        Φ_Total = Array{Float64, 1}(undef, N)
+        for j ∈ 1:N
+            Φ_Total[j] = cycle_func(r_p[j], T_min, T_max, T_L, T_H, η_c, η_t, ϵ, Gasses[i])
+        end
+        Φ_Total_r80 = Array{Float64, 1}(undef, N)
+        for j ∈ 1:N
+            Φ_Total_r80[j] = cycle_func(r_p[j], T_min, T_max, T_L, T_H, 1, 1, 0.8, Gasses[i])
+        end
+        Φ_Total_r100 = Array{Float64, 1}(undef, N)
+        for j ∈ 1:N
+            Φ_Total_r100[j] = cycle_func(r_p[j], T_min, T_max, T_L, T_H, 1, 1, 1, Gasses[i])
+        end
+
+        #plot!(r_p, Φ_Total, label=Gasses[i].name, c = i)
+        name = Gasses[i].name
+        plot!(r_p, Φ_Total_r80, fillrange=Φ_Total_r100, fillalpha = 0.5, c = i, alpha=0.2, label=latexstring("$name: \$0.8 < \\epsilon < 1\$"), gradient=true)
+        plot!(r_p, Φ_Total_r80, label=nothing, line = (1, :dash), c=i)
+        plot!(r_p, Φ_Total_r100, label=nothing, c=i)
+
+    end
+
+    xlabel!("Pressure Ratio")
+    ylabel!("Exergy Destroyed [kJ/kg]")
+end
+
+function Φ_Total_c_vs_rp(cycle_func, r_p, T_min, T_max, T_L, T_H, η_c, η_t, ϵ, Gasses)
+    N = length(r_p)
+    M = length(Gasses)
+
+    plot()
+
+    for i ∈ 1:M
+        Φ_Total = Array{Float64, 1}(undef, N)
+        for j ∈ 1:N
+            Φ_Total[j] = cycle_func(r_p[j], T_min, T_max, T_L, T_H, η_c, η_t, ϵ, Gasses[i])
+        end
+        Φ_Total_c80 = Array{Float64, 1}(undef, N)
+        for j ∈ 1:N
+            Φ_Total_c80[j] = cycle_func(r_p[j], T_min, T_max, T_L, T_H, 0.8, 1, 1, Gasses[i])
+        end
+        Φ_Total_c100 = Array{Float64, 1}(undef, N)
+        for j ∈ 1:N
+            Φ_Total_c100[j] = cycle_func(r_p[j], T_min, T_max, T_L, T_H, 1, 1, 1, Gasses[i])
+        end
+
+        #plot!(r_p, Φ_Total, label=Gasses[i].name, c = i)
+        name = Gasses[i].name
+        plot!(r_p, Φ_Total_c80, fillrange=Φ_Total_c100, fillalpha = 0.5, c = i, alpha=0.2, label=latexstring("$name: \$0.8 < \\eta_{c} < 1\$"), gradient=true)
+        plot!(r_p, Φ_Total_c80, label=nothing, line = (1, :dash), c=i)
+        plot!(r_p, Φ_Total_c100, label=nothing, c=i)
+
+    end
+
+    xlabel!("Pressure Ratio")
+    ylabel!("Exergy Destroyed [kJ/kg]")
+end
+
+function Φ_Total_t_vs_rp(cycle_func, r_p, T_min, T_max, T_L, T_H, η_c, η_t, ϵ, Gasses)
+    N = length(r_p)
+    M = length(Gasses)
+
+    plot()
+
+    for i ∈ 1:M
+        Φ_Total = Array{Float64, 1}(undef, N)
+        for j ∈ 1:N
+            Φ_Total[j] = cycle_func(r_p[j], T_min, T_max, T_L, T_H, η_c, η_t, ϵ, Gasses[i])
+        end
+        Φ_Total_t80 = Array{Float64, 1}(undef, N)
+        for j ∈ 1:N
+            Φ_Total_t80[j] = cycle_func(r_p[j], T_min, T_max, T_L, T_H, 1, 0.8, 1, Gasses[i])
+        end
+        Φ_Total_t100 = Array{Float64, 1}(undef, N)
+        for j ∈ 1:N
+            Φ_Total_t100[j] = cycle_func(r_p[j], T_min, T_max, T_L, T_H, 1, 1, 1, Gasses[i])
+        end
+
+        #plot!(r_p, Φ_Total, label=Gasses[i].name, c = i)
+        name = Gasses[i].name
+        plot!(r_p, Φ_Total_t80, fillrange=Φ_Total_t100, fillalpha = 0.5, c = i, alpha=0.2, label=latexstring("$name: \$0.8 < \\eta_{t} < 1\$"), gradient=true)
+        plot!(r_p, Φ_Total_t80, label=nothing, line = (1, :dash), c=i)
+        plot!(r_p, Φ_Total_t100, label=nothing, c=i)
+
+    end
+
+    xlabel!("Pressure Ratio")
+    ylabel!("Exergy Destroyed [kJ/kg]")
+end
