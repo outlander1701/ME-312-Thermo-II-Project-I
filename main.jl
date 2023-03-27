@@ -4,8 +4,9 @@ include("./Exergy.jl")
 #include("./cycles/intercool.jl")
 #include("./cycles/regen.jl")
 #include("./cycles/IRR.jl")
+#include("./cycles/IRR.jl")
 include("./Tables.jl")
-#include("./plotting.jl")
+include("./plotting.jl")
 include("./Gasses.jl")
 
 
@@ -19,7 +20,7 @@ T_L = 283 # K
 T_H = 1620
 
 # Properites to Vary
-r_p = 1:0.1:60 #60
+r_p = 1:1:60
 
 η_c = 1
 η_t = 1
